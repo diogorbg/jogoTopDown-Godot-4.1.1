@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://m33c0gi71dpa"]
+
+[ext_resource type="Script" path="res://scripts/faseBase.gd" id="1_0ob0m"]
+[ext_resource type="PackedScene" uid="uid://bnwnhyivagje6" path="res://cenas/jogador.tscn" id="2_5me1i"]
+[ext_resource type="PackedScene" uid="uid://dpec4txhmvtbd" path="res://cenas/hud.tscn" id="2_i0u7x"]
+
+[node name="faseBase" type="Node2D"]
+script = ExtResource("1_0ob0m")
+
+[node name="ySort" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="jogador" parent="ySort" instance=ExtResource("2_5me1i")]
+position = Vector2(281, 385)
+
+[node name="HUD" parent="." instance=ExtResource("2_i0u7x")]

@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=3 uid="uid://e7l7skoj2mlv"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_bojd3"]
+[ext_resource type="Texture2D" uid="uid://bmixtdvs8stri" path="res://sprites/bg.jpg" id="1_nfxo1"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bojd3")
+
+[node name="bg" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_nfxo1")
+expand_mode = 1
+
+[node name="titulo" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -243.5
+offset_top = -110.0
+offset_right = 243.5
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 42
+text = "Meu Jogo de Plataforma"
+
+[node name="butNovo" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.5
+offset_top = -36.0
+offset_right = 87.5
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Novo Jogo"
+
+[node name="butSair" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.5
+offset_top = 43.0
+offset_right = 87.5
+offset_bottom = 115.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Sair"
+
+[connection signal="pressed" from="butNovo" to="." method="_on_bot_novo_pressed"]
+[connection signal="pressed" from="butSair" to="." method="_on_bot_sair_pressed"]

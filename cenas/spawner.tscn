@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmh87ppvbm2se"]
+
+[ext_resource type="Script" path="res://scripts/spawn.gd" id="1_t0ckq"]
+[ext_resource type="Texture2D" uid="uid://pav73qo8fgtw" path="res://sprites/Dungeon_Tileset.png" id="2_tt5vb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vch17"]
+radius = 64.0
+
+[node name="spawner" type="Node2D" groups=["spawner"]]
+y_sort_enabled = true
+script = ExtResource("1_t0ckq")
+
+[node name="timer" type="Timer" parent="."]
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
+texture = ExtResource("2_tt5vb")
+region_enabled = true
+region_rect = Rect2(98, 430, 27, 18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vch17")
+disabled = true
+
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
