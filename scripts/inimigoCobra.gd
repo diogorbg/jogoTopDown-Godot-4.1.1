@@ -14,7 +14,7 @@ var atacar: bool = false
 var _alvo: Node2D
 
 func _init():
-	Global.addInimigo(1)
+	Global.addInimigo(1) # Adiciona na contagem de inimigos spawnados
 	
 # Para a execução do inimigo
 func stop():
@@ -25,20 +25,17 @@ func _physics_process(_delta):
 	if hp <= 0 || _alvo != null: return
 #	if Jogador.jogador == null: return
 
-	var dist = global_position.direction_to(Jogador.jogador.global_position)
+	anim.play("mover")
+	var distancia = global_position.direction_to(Jogador.jogador.global_position)
+	var direcao = distancia.normalized()
+	if direcao.x < 0: sprite.flip_h = true
+	if direcao.x > 0: sprite.flip_h = false
+	velocity = direcao * speed
+	move_and_slide()
 
-	if dist.length() > 32:
-		anim.play("parado")
-	else:
-		anim.play("mover")
-		var dir = dist.normalized()
-		if dir.x < 0: sprite.flip_h = true
-		if dir.x > 0: sprite.flip_h = false
-		velocity = dir * speed
-		move_and_slide()
-
-func addHit(damage: int):
-	hp -= damage
+# Função onde o inimigo recebe dano
+func addHit(dano: int):
+	hp -= dano
 	if hp <= 0:
 		collision.set_deferred("disabled", true)
 		anim.play("morrer")
@@ -59,6 +56,6 @@ func _on_addHit_body_entered(body):
 		anim.play("atacar")
 
 func _on_addHit_body_exited(body):
-	# Se for o mesmo body, então o ataque deve parar
-	if hp > 0 && body == _alvo:
+	# Se for o mesmo _alvo, então o ataque deve parar
+	if body == _alvo:
 		atacar = false
