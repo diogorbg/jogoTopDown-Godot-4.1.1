@@ -44,17 +44,21 @@ func addHit(dano: int):
 # Função chamada pela animação. Quadro exato de ataque do inimigo
 func anim_addHit():
 	_alvo.addHit(1)
+	# Aguarda o fim da animação de ataque
+	await anim.animation_finished
+	if hp > 0 && atacar:
+		anim.play("atacar")
+	else:
+		_alvo = null
 
-# Função chamada pela animação. Fim da animação de ataque
-func anim_fimAtaque():
-	if !atacar: _alvo = null
-
+# Ao entrar na área que causa dabo
 func _on_addHit_body_entered(body):
 	if hp > 0 && body.is_in_group("jogador"):
 		atacar = true
 		_alvo = body
 		anim.play("atacar")
 
+# Ao sair da área de dano
 func _on_addHit_body_exited(body):
 	# Se for o mesmo _alvo, então o ataque deve parar
 	if body == _alvo:
